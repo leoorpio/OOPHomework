@@ -1,6 +1,8 @@
 package guitarsearch.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,18 +33,39 @@ public class SearchGuitar extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-//		response.setContentType("text/x-json");
-//		PrintWriter pw = response.getWriter();
-
+		response.setContentType("application/json; charset = utf-8");
+		PrintWriter pw = response.getWriter();
+		
+		String j = "{\"success\": true, \"row\": [";
 		Guitar searchGuitar = new Guitar();
 		
 		searchGuitar.setBuilder(request.getParameter("builder"));
 		searchGuitar.setModel(request.getParameter("model"));
 		searchGuitar.setType(request.getParameter("type"));
 		searchGuitar.setBackWood(request.getParameter("backWood"));
-		searchGuitar.setTopWood(request.getParameter("topWood"));		
-		InventoryDaoImpl inventory = new InventoryDaoImpl();
-		inventory.getAllGuitars();
+		searchGuitar.setTopWood(request.getParameter("topWood"));
+		InventoryDaoImpl inv = new InventoryDaoImpl();
+		Guitar guitar = null;
+		guitar = inv.searchGuitar(searchGuitar);
+		if(guitar != null) {
+			j += "{";
+			j += "\"serialNumber\":\"" + guitar.getSerialNumber() + "\", ";
+			j += "\"builder\":\"" + guitar.getBuilder() + "\", ";
+			j += "\"model\":\"" + guitar.getModel() + "\", ";
+			j += "\"type\":\"" + guitar.getType() +"\", ";
+			j += "\"backWood\":\"" + guitar.getBackWood() + "\", ";
+			j += "\"topWood\":\"" + guitar.getTopWood() + "\", ";
+			j += "\"price\":" + guitar.getPrice() + "}";
+			j += ", ";
+		}
+		
+		if (j != "{\"success\": true, \"row\": [") {
+			j = j.substring(0, j.length() - 2);
+			j += "]}";
+		} else {
+			j = "{\"success\": false, \"row\": [{\"Tips\": \"老板，没有查询到符合的信息！\"}]}";
+		}
+		pw.print(j);
 	}
 
 }

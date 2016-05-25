@@ -54,7 +54,7 @@
 		text-indent: 1em;
 	}
 
-	#search-form input[type=submit] {
+	#btnQuery {
 		float: right;
 		font-size: 1.2em;
 		width: 100px;
@@ -62,24 +62,52 @@
 		color: #fff;
 	}
 
-	#search-form input[type=submit]:hover {
+	#btnQuery:hover {
 		background-color: #000;
 	}
 
-	#result-show {	
+	#result {	
 		height: 500px;
 		border: 1px solid #aaa;
 		padding: 1em;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
 	}
-
-	#result-show table {
+	
+	#result h2 {
+	  margin: 10px;
+	}
+	
+	#result table {
 		width: 98%;
 		border-collapse: collapse;
 		text-align: center;
+		align-self: center;
 	}
 
-	#result-show table thead tr{
-		height: 2em;
+	#result table thead tr{
+		height: 2.5em;
 		background-color: #000;
 		color: #fff;
+	}
+
+	#r-tbody tr {
+		height: 2em;
+	}
+
+	#r-tbody tr:hover {
+		background-color: #ccc;
+	}
+	
+	#r-tbody tr td:hover{
+		background-color: #bf7070;
+		
+	}
+	 
+	#tips {
+		width: auto;
+		text-align: center;
+		line-height: 3em;
+		font-size: 20px;
 	}

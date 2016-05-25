@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -55,18 +56,27 @@ public class InventoryDaoImpl implements InventoryDAO{
 	public  List<Guitar> getAllGuitars() {
 		List<Guitar> guitars = new LinkedList<Guitar>();
 		Connection conn = JdbcConn.getJdbcConn();
+		Statement stmt;
 		ResultSet rs = null;
 		String sql = "Select * From Inventory";
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
-				Guitar guitar = new Guitar(rs.getString("serialNumber"), rs.getDouble("price"), rs.getString("builder"),
-						rs.getString("model"), rs.getString("type"), rs.getString("backWood"), rs.getString("topWood"));
+				Guitar guitar = new Guitar();
+
+				guitar.setSerialNumber(rs.getString("serialNumber"));
+				guitar.setPrice(rs.getDouble("price"));
+				guitar.setBuilder(rs.getString("builder"));
+				guitar.setModel(rs.getString("model"));
+				guitar.setType(rs.getString("type"));
+				guitar.setBackWood(rs.getString("backWood"));
+				guitar.setTopWood(rs.getString("topWood"));
+				
 				guitars.add(guitar);
 			}
 			rs.close();
-			pstmt.close();
+			stmt.close();
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -85,7 +95,7 @@ public class InventoryDaoImpl implements InventoryDAO{
 	        if ((builder != null) && (!builder.equals("")) && (!builder.equals(guitar.getBuilder())))
 	          continue;
 	        return guitar;
-	      }
-	      return null;	
+	    }
+	    return null;	
 	}
 }
