@@ -10,4 +10,4 @@
 ---    
 
 * 搜索结果二：符合条件，返回
-![guitar销售系统v1 搜索结果二](https://raw.githubusercontent.com/leoorpio/OOPHomework/master/task_01/img/result_02.png "result02")
+![guitar销售系统v1 搜索结果二](https://github.com/leoorpio/OOPHomework/blob/master/GuitarSearch/img/result_02.png "result02")
