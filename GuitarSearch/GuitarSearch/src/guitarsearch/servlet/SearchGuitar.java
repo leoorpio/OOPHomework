@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import guitarseach.dao.InventoryDAO;
 import guitarsearch.daoImpl.InventoryDaoImpl;
 import guitarsearch.domain.Guitar;
 
@@ -39,12 +40,14 @@ public class SearchGuitar extends HttpServlet {
 		String j = "{\"success\": true, \"row\": [";
 		Guitar searchGuitar = new Guitar();
 		
+		searchGuitar.setSerialNumber(request.getParameter("serialNumber"));
 		searchGuitar.setBuilder(request.getParameter("builder"));
 		searchGuitar.setModel(request.getParameter("model"));
 		searchGuitar.setType(request.getParameter("type"));
 		searchGuitar.setBackWood(request.getParameter("backWood"));
 		searchGuitar.setTopWood(request.getParameter("topWood"));
-		InventoryDaoImpl inv = new InventoryDaoImpl();
+
+		InventoryDAO inv = new InventoryDaoImpl();
 		Guitar guitar = null;
 		guitar = inv.searchGuitar(searchGuitar);
 		if(guitar != null) {

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>Guitar Seacher</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+	<script type="text/javascript" src="js/search.js"></script>
+</head>
+<body>
+	<header id="header">
+		<div class="welcomes">
+			<span>Rick's store</span>
+			<sub>Welcome here to choose the guitar you like</sub>
+		</div>
+	</header>
+	<section id="content">
+		<div class="search-form">
+			<form id="myform">
+				<ul>
+					<li>
+						<label for="serialNumber">Serial Number:</label>
+						<input type="input" name="serialNumber" id="serialNumber">
+					</li>
+
+					<li>
+						<label for="builder">Builder:</label>
+						<input type="input" name="builder" id="builder">
+					</li>
+
+					<li>
+						<label for="model">Model:</label>
+						<input type="input" name="model"  id="model">
+					</li>
+
+					<li>
+						<label for="type">Type:</label>
+						<input type="input" name="type" id="type">
+					</li>
+
+					<li>
+						<label for="backWood">Back Wood:</label>
+						<input type="input" name="backWood" id="backWood">
+					</li>
+					<li>
+						<label for="">Top Wood:</label>
+						<input type="input" name="topWood" id="topWood">
+					</li>
+				</ul>
+				<input type="button" name="submit" value="search" id="btnQuery">
+			</form>
+		</div>
+
+		<div class="result">
+			<h2>Results</h2>
+
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Serial Number</th>
+						<th>Builder</th>
+						<th>Model</th>
+						<th>Type</th>
+						<th>Back Wood</th>
+						<th>Top Wood</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+
+				<tbody id="r-tbody">
+				</tbody>
+			</table>
+
+			<div id="tips"></div>
+		</div>
+	</section>
+</body>
+</html>

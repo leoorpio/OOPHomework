@@ -14,7 +14,8 @@ import guitarsearch.domain.Guitar;
 import guitarsearch.domain.JdbcConn;
 
 public class InventoryDaoImpl implements InventoryDAO{
-	public  boolean addGuitar(String serialNumber, double price, String builder, String model, String type, String backWood, String topWood) {
+	
+	public boolean addGuitar(String serialNumber, double price, String builder, String model, String type, String backWood, String topWood) {
 		int i = 0;
 		Connection conn = JdbcConn.getJdbcConn();
 		PreparedStatement pstmt = null;
@@ -33,25 +34,15 @@ public class InventoryDaoImpl implements InventoryDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return i > 0;
 	}
-	public  boolean updateGuitar(String serialNumber, double price, String builder, String model, String type, String backWood, String topWood) {
-		int i = 0;
-		/**
-		 * code
-		 */
-		return i > 0;		
+	public boolean updateGuitar(String serialNumber, double price, String builder, String model, String type, String backWood, String topWood) {
+		return false;		
 	}
 	
-	public  boolean deleteGuitar(String serialNumber, double price, String builder, String model, String type, String backWood, String topWood) {
-		int i = 0;
-		/**
-		 * code
-		 */
-		return i > 0;		
+	public boolean deleteGuitar(String serialNumber, double price, String builder, String model, String type, String backWood, String topWood) {
+		return false;
 	}
-	
 	
 	public  List<Guitar> getAllGuitars() {
 		List<Guitar> guitars = new LinkedList<Guitar>();
@@ -64,7 +55,6 @@ public class InventoryDaoImpl implements InventoryDAO{
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
 				Guitar guitar = new Guitar();
-
 				guitar.setSerialNumber(rs.getString("serialNumber"));
 				guitar.setPrice(rs.getDouble("price"));
 				guitar.setBuilder(rs.getString("builder"));
@@ -72,7 +62,6 @@ public class InventoryDaoImpl implements InventoryDAO{
 				guitar.setType(rs.getString("type"));
 				guitar.setBackWood(rs.getString("backWood"));
 				guitar.setTopWood(rs.getString("topWood"));
-				
 				guitars.add(guitar);
 			}
 			rs.close();
@@ -92,9 +81,11 @@ public class InventoryDaoImpl implements InventoryDAO{
 	    for (Iterator<Guitar> i = guitars.iterator(); i.hasNext(); ) {	    	
 	        Guitar guitar = (Guitar)i.next();        
 	        String builder = searchGuitar.getBuilder();
-	        if ((builder != null) && (!builder.equals("")) && (!builder.equals(guitar.getBuilder())))
-	          continue;
-	        return guitar;
+	        if ((builder == null) || (builder.equals("")) || (!builder.equals(guitar.getBuilder()))){
+		          continue;	        	
+	        }else {
+		        return guitar;	        	
+	        }
 	    }
 	    return null;	
 	}
