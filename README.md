@@ -11,3 +11,7 @@
 
 * 搜索结果二：符合条件，返回
 ![guitar销售系统v1 搜索结果二](https://github.com/leoorpio/OOPHomework/blob/master/GuitarSearch/img/result_02.png "result02")
+
+## Guitar 销售系统2.0
+    搜索界面不友好，以下是未改进的初步效果
+![guitar销售系统2.0 搜索界面效果](https://github.com/leoorpio/OOPHomework/blob/master/GuitarSearch2/img/result_03.png "result03")
