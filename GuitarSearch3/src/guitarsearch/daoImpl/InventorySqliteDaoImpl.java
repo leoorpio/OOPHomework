@@ -46,8 +46,21 @@ public class InventorySqliteDaoImpl implements InventoryDao {
 
 	@Override
 	public boolean deleteGuitar(String serialNumber) {
-		// TODO Auto-generated method stub
-		return false;
+		int i = 0;
+		Connection conn = DBUtil.getSqliteConn();
+		String sql = "Delete From Inventory Where serialNumber = ?";
+
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, serialNumber);
+			i = pstmt.executeUpdate();
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return i > 0;
 	}
 
 	@Override
